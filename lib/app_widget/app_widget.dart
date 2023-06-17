@@ -1,4 +1,4 @@
-import 'package:app_c7_bank/telas/cadastro_screen.dart';
+import 'package:app_c7_bank/telas/cadastro/cadastro_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {
@@ -6,6 +6,11 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: CadastroScreen());
+    return const MaterialApp(
+      // theme: ThemeData(
+      //   useMaterial3: true,
+      // ),
+      home: CadastroScreen(),
+    );
   }
 }
