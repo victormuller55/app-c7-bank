@@ -1,4 +1,5 @@
 import 'package:app_c7_bank/telas/cadastro/cadastro_screen.dart';
+import 'package:app_c7_bank/telas/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppWidget extends StatelessWidget {

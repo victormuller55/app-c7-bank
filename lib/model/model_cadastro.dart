@@ -9,12 +9,6 @@ class ClienteModel {
     this.senhaCliente,
   });
 
-  ClienteModel.fromMap(Map<String, dynamic> json) {
-    nomeCliente = json['nome_cliente'];
-    cpfCliente = json['cpf_cliente'];
-    senhaCliente = json['senha_cliente'];
-  }
-
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['nome_cliente'] = nomeCliente;

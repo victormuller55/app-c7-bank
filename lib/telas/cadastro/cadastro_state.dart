@@ -1,14 +1,8 @@
-
-import 'package:app_c7_bank/telas/cadastro/cadastro_model.dart';
+import 'package:app_c7_bank/model/model_conta.dart';
 
 abstract class CadastroState {
-  // ClienteModel? userModel;
-  // YKError? error;
-
-  // CadastroState({
-    // this.userModel,
-    // this.error,
-  // });
+  ContaModel? contaModel;
+  CadastroState({this.contaModel});
 }
 
 class CadastroInitialState extends CadastroState {}
@@ -16,7 +10,7 @@ class CadastroInitialState extends CadastroState {}
 class CadastroLoadingState extends CadastroInitialState {}
 
 class CadastroSuccessState extends CadastroState {
-  // CadastroSuccessState({ClienteModel? clienteModel}) : super(userModel: clienteModel);
+  CadastroSuccessState({required ContaModel contaModel}) : super(contaModel: contaModel);
 }
 
 class CadastroErrorState extends CadastroState {}

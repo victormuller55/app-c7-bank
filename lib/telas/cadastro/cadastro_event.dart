@@ -1,4 +1,4 @@
-import 'package:app_c7_bank/telas/cadastro/cadastro_model.dart';
+import 'package:app_c7_bank/model/model_cadastro.dart';
 
 abstract class CadastroEvent {}
 
