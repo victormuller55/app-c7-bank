@@ -14,6 +14,7 @@ Widget getContainer({
   EdgeInsets? padding,
   EdgeInsets? margin,
   List<BoxShadow>? boxShadow,
+  List<Color>? colorsGradient,
 }) {
   return Container(
     height: height,
@@ -26,6 +27,7 @@ Widget getContainer({
       color: color,
       border: border,
       boxShadow: boxShadow,
+      gradient: colorsGradient != null ? LinearGradient(colors: colorsGradient) : null,
     ),
     child: child,
   );
@@ -136,29 +138,35 @@ SnackBar getGenericSnackBar(
   );
 }
 
-SnackBar getSnackBarError(BuildContext context) {
-  return getGenericSnackBar(
-    context,
-    message: "Ocorreu um erro durante a operação, tente novamente mais tarde!",
-    color: Colors.red,
-    buttonColor: Colors.red.shade700,
+void showSnackBarError(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    getGenericSnackBar(
+      context,
+      message: "Ocorreu um erro durante a operação, tente novamente mais tarde!",
+      color: Colors.red,
+      buttonColor: Colors.red.shade700,
+    ),
   );
 }
 
-SnackBar getSnackBarWarning(BuildContext context, {required String message}) {
-  return getGenericSnackBar(
-    context,
-    message: message,
-    color: Colors.orange,
-    buttonColor: Colors.orange.shade700,
+void showSnackBarWarning(BuildContext context, {required String message}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    getGenericSnackBar(
+      context,
+      message: message,
+      color: Colors.orange,
+      buttonColor: Colors.orange.shade700,
+    ),
   );
 }
 
-SnackBar getSnackBarSucess(BuildContext context, {required String message}) {
-  return getGenericSnackBar(
-    context,
-    message: message,
-    color: Colors.green,
-    buttonColor: Colors.green.shade700,
+void showSnackBarSucess(BuildContext context, {required String message}) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    getGenericSnackBar(
+      context,
+      message: message,
+      color: Colors.green,
+      buttonColor: Colors.green.shade700,
+    ),
   );
 }

@@ -63,7 +63,6 @@ void functionTranferir(
   required TextEditingController numeroContaController,
   required TextEditingController valorController,
 }) {
-
   var snackBarWarning = SnackBar(
     content: getText("Preencha todos os campos"),
     backgroundColor: Colors.orange,
@@ -85,30 +84,59 @@ void functionTranferir(
 }
 
 void showDialogC7(BuildContext context, {required List<Widget> content}) {
-
   showDialog(
     context: context,
-    builder: (context) => Padding(
-      padding: const EdgeInsets.only(top: 150, bottom: 150),
-      child: Dialog(
-        alignment: Alignment.center,
-        shadowColor: Colors.black,
-        elevation: 2,
-        backgroundColor: Colors.transparent,
-        child: getContainer(
-          color: Colors.grey.shade900,
-          borderRadius: BorderRadius.circular(15),
-          padding: const EdgeInsets.only(left: 15, right: 15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 85, child: Image.asset("assets/images/logo.png")),
-              const SizedBox(height: 15),
-              ...content,
-            ],
+    builder: (context) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Dialog(
+            shadowColor: Colors.black,
+            backgroundColor: Colors.transparent,
+            child: getContainer(
+              color: Colors.grey.shade900,
+              borderRadius: BorderRadius.circular(15),
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 15),
+                  SizedBox(height: 85, child: Image.asset("assets/images/logo.png")),
+                  const SizedBox(height: 15),
+                  ...content,
+                ],
+              ),
+            ),
           ),
-        ),
+        ],
+      );
+    },
+  );
+}
+
+List<Widget> contentPopupPagarBoleto(
+  BuildContext context, {
+  required HomeBloc bloc,
+  required ContaModel model,
+  required TextEditingController controllerValor,
+}) {
+  return [
+    getFormfield(
+      hintText: "R\$ 1000",
+      labelText: "Digite o valor",
+      textEditingController: controllerValor,
+      width: 400,
+    ),
+    const SizedBox(height: 20),
+    getButton(
+      text: "Pagar",
+      function: () => functionPagar(
+        context,
+        textEditingController: controllerValor,
+        model: model,
+        bloc: bloc,
       ),
     ),
-  );
+  ];
 }
