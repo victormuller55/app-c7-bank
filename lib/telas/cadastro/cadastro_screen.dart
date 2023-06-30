@@ -95,10 +95,8 @@ class _CadastroScreenState extends State<CadastroScreen> {
         if (state is CadastroErrorState) ScaffoldMessenger.of(context).showSnackBar(snackBarError);
         if (state is CadastroErrorState) setState(() {});
         if (state is CadastroSuccessState) ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
-        if (state is CadastroSuccessState) Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(contaModel: state.contaModel ?? ContaModel(), nomeCliente: nome.text)));
-
-        },
-
+        if (state is CadastroSuccessState) Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(model: state.contaModel, nomeCliente: nome.text)));
+      },
       builder: (context, state) {
         switch (state.runtimeType) {
           case CadastroLoadingState:
