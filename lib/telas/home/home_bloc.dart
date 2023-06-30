@@ -12,6 +12,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         Response response = await deposito(conta: event.conta, valor: event.valor);
         emit(HomeSuccessState(saldoAtual: double.parse(response.body)));
       } catch (e) {
+        print(e);
         emit(HomeErrorState());
       }
     });
@@ -21,6 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         Response response = await pagar(conta: event.conta, valor: event.valor);
         emit(HomeSuccessState(saldoAtual: double.parse(response.body)));
       } catch (e) {
+        print(e);
         emit(HomeErrorState());
       }
     });
@@ -30,6 +32,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         Response response = await tranferencia(conta: event.conta, contaReceber: event.contaReceber, valor: event.valor);
         emit(HomeSuccessState(saldoAtual: double.parse(response.body)));
       } catch (e) {
+        print(e);
         emit(HomeErrorState());
       }
     });
@@ -39,6 +42,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         Response response = await pix(conta: event.conta, cpf: event.cpf, valor: event.valor);
         emit(HomeSuccessState(saldoAtual: double.parse(response.body)));
       } catch (e) {
+        print(e);
         emit(HomeErrorState());
       }
     });

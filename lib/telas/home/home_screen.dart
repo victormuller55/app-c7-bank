@@ -1,6 +1,7 @@
 import 'package:app_c7_bank/dialogs_home.dart';
 import 'package:app_c7_bank/functions/util.dart';
 import 'package:app_c7_bank/model/model_conta.dart';
+import 'package:app_c7_bank/telas/cadastro/cadastro_screen.dart';
 import 'package:app_c7_bank/telas/home/home_bloc.dart';
 import 'package:app_c7_bank/telas/home/home_state.dart';
 import 'package:app_c7_bank/widget.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
-
   final ContaModel model;
   final String nomeCliente;
 
@@ -24,7 +24,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   HomeBloc bloc = HomeBloc();
   bool canSeeSaldo = false;
 
@@ -106,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Container(),
+        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CadastroScreen()))),
         centerTitle: true,
         backgroundColor: const Color.fromRGBO(21, 21, 20, 1),
         title: Image.asset("assets/images/logo.png", height: 40),
@@ -136,5 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
   }
 }

@@ -1,58 +1,54 @@
+import 'package:app_c7_bank/telas/cadastro/cadastro_screen.dart';
+import 'package:app_c7_bank/telas/entrar/entrar_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:app_c7_bank/model/model_cadastro.dart';
 import 'package:app_c7_bank/telas/cadastro/cadastro_bloc.dart';
 import 'package:app_c7_bank/telas/cadastro/cadastro_event.dart';
 import 'package:app_c7_bank/telas/cadastro/cadastro_state.dart';
-import 'package:app_c7_bank/telas/entrar/entrar_screen.dart';
 import 'package:app_c7_bank/telas/home/home_screen.dart';
 import 'package:app_c7_bank/widget.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class CadastroScreen extends StatefulWidget {
-  const CadastroScreen({Key? key}) : super(key: key);
+import 'entrar_event.dart';
+import 'entrar_state.dart';
+
+class EntrarScreen extends StatefulWidget {
+  const EntrarScreen({Key? key}) : super(key: key);
 
   @override
-  State<CadastroScreen> createState() => _CadastroScreenState();
+  State<EntrarScreen> createState() => _EntrarScreenState();
 }
 
-class _CadastroScreenState extends State<CadastroScreen> {
+class _EntrarScreenState extends State<EntrarScreen> {
 
-  CadastroBloc bloc = CadastroBloc();
+  EntrarBloc bloc = EntrarBloc();
 
-  TextEditingController nome = TextEditingController();
-  TextEditingController cpf = TextEditingController();
+  TextEditingController numero = TextEditingController();
+  TextEditingController agencia = TextEditingController();
   TextEditingController senha = TextEditingController();
 
-  MaskTextInputFormatter maskFormatter = MaskTextInputFormatter(
-    mask: '###.###.###-##',
-    filter: {"#": RegExp(r'[0-9]')},
-    type: MaskAutoCompletionType.lazy,
-  );
-
   void _salvarCliente() {
-    if (nome.text.isNotEmpty && cpf.text.isNotEmpty && senha.text.isNotEmpty) {
-      ClienteModel clienteModel = ClienteModel(nomeCliente: nome.value.text, cpfCliente: cpf.value.text, senhaCliente: senha.value.text);
-      bloc.add(CadastroSalvarEvent(clienteModel));
+    if (numero.text.isNotEmpty && agencia.text.isNotEmpty && senha.text.isNotEmpty) {
+      bloc.add(EntrarEntrarEvent(numero: numero.text, agencia: agencia.text, senha: senha.text));
       setState(() {});
     } else {
       showSnackBarWarning(context, message: "Todos os campos são obrigatórios");
     }
   }
 
-  void _onChangeState(CadastroState state) {
-    if (state is CadastroErrorState) showSnackBarError(context);
-    if (state is CadastroErrorState) setState(() {});
-    if (state is CadastroSuccessState) showSnackBarSucess(context, message: "Conta criada com sucesso");
-    if (state is CadastroSuccessState) Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(model: state.contaModel, nomeCliente: nome.text)));
+  void _onChangeState(EntrarState state) {
+    if (state is EntrarErrorState) showSnackBarError(context);
+    if (state is EntrarErrorState) setState(() {});
+    if (state is EntrarSuccessState) showSnackBarSucess(context, message: "Login realizado com sucesso");
+    if (state is EntrarSuccessState) Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(model: state.contaModel, nomeCliente: "Cliente")));
   }
 
   Widget _botao() {
     return AnimatedButton(
       width: MediaQuery.of(context).size.width / 3,
-      text: bloc.state is CadastroLoadingState ? "ENVIANDO DADOS..." : 'CADASTRAR',
+      text: bloc.state is CadastroLoadingState ? "PROCURANDO CONTA..." : 'ENTRAR',
       selectedTextColor: Colors.black,
       backgroundColor: Colors.yellow,
       borderRadius: 10,
@@ -85,19 +81,19 @@ class _CadastroScreenState extends State<CadastroScreen> {
                 Image.asset("assets/images/logo.png", height: 100, width: MediaQuery.of(context).size.width / 5),
                 const Spacer(),
                 const SizedBox(height: 40),
-                getText("CADASTRO",  color: Colors.yellow, bold: true, fontSize: 23),
+                getText("ENTRAR",  color: Colors.yellow, bold: true, fontSize: 23),
                 const SizedBox(height: 20),
-                getFormfield(textEditingController: cpf, hintText: "123.456.789-10", labelText: "CPF", textInputType: TextInputType.number, maskTextInputFormatter: maskFormatter),
-                getFormfield(textEditingController: nome, hintText: "Lucas Henrique", labelText: "Nome"),
+                getFormfield(textEditingController: numero, hintText: "1234567-8", labelText: "Número", textInputType: TextInputType.number),
+                getFormfield(textEditingController: agencia, hintText: "1238", labelText: "Agencia"),
                 getFormfield(textEditingController: senha, hintText: "", labelText: "Senha", obscureText: true),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    getText("Ja tem conta?   ",  color: Colors.white),
+                    getText("Não tem conta?   ",  color: Colors.white),
                     GestureDetector(
-                      onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const EntrarScreen())),
-                      child: getText("ENTRAR",  color: Colors.yellow, bold: true),
+                      onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const CadastroScreen())),
+                      child: getText("CADASTRAR",  color: Colors.yellow, bold: true),
                     ),
                   ],
                 ),
@@ -112,7 +108,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
   }
 
   Widget _builderButtom() {
-    return BlocConsumer<CadastroBloc, CadastroState>(
+    return BlocConsumer<EntrarBloc, EntrarState>(
       bloc: bloc,
       listener: (context, state) => _onChangeState(state),
       builder: (context, state) => _botao(),

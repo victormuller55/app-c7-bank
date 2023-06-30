@@ -25,6 +25,11 @@ Future<Response> putHTTP({required String endpoint, Map<String, String>? paramet
   return Response(statusCode: endpointResult.statusCode, body: endpointResult.body);
 }
 
+Future<Response> getHTTP({required String endpoint, Map<String, String>? parameters}) async {
+  http.Response endpointResult = await http.get(Uri.parse(endpoint + getParametersFormatted(parameters: parameters)), headers: header);
+  return Response(statusCode: endpointResult.statusCode, body: endpointResult.body);
+}
+
 class Response {
   int statusCode;
   String body;

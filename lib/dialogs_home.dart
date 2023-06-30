@@ -48,7 +48,7 @@ void functionDeposito(
     showSnackBarWarning(context, message: "Preencha todos os campos.");
   }
 
-  Navigator.pop(context);
+  Future.delayed(const Duration(milliseconds: 500)).then((value) => Navigator.pop(context));
 }
 
 void functionPagar(
@@ -63,7 +63,7 @@ void functionPagar(
     showSnackBarWarning(context, message: "Preencha todos os campos.");
   }
 
-  Navigator.pop(context);
+  Future.delayed(const Duration(milliseconds: 500)).then((value) => Navigator.pop(context));
 }
 
 void functionTranferir(
@@ -79,7 +79,7 @@ void functionTranferir(
     showSnackBarWarning(context, message: "Preencha todos os campos.");
   }
 
-  Navigator.pop(context);
+  Future.delayed(const Duration(milliseconds: 500)).then((value) => Navigator.pop(context));
 }
 
 void functionTranferirPIX(
@@ -95,7 +95,7 @@ void functionTranferirPIX(
     showSnackBarWarning(context, message: "Preencha todos os campos.");
   }
 
-  Navigator.pop(context);
+  Future.delayed(const Duration(milliseconds: 500)).then((value) => Navigator.pop(context));
 }
 
 List<Widget> contentPopupPagarBoleto(
