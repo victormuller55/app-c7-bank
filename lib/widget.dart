@@ -51,7 +51,7 @@ Widget getText(
   );
 }
 
-Widget getButton({
+Widget getButtonPopup({
   required void Function() function,
   required String text,
 }) {

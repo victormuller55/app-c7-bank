@@ -113,7 +113,7 @@ List<Widget> contentPopupPagarBoleto(
       width: 400,
     ),
     const SizedBox(height: 20),
-    getButton(
+    getButtonPopup(
       text: "Pagar",
       function: () => functionPagar(
         context,
@@ -140,14 +140,14 @@ List<Widget> contentPopupTranferencia(
       textEditingController: controllerNumeroConta,
       width: 400,
     ),
-    const SizedBox(height: 10),
     getFormfield(
       hintText: "R\$ 1000",
       labelText: "Digite o valor",
       textEditingController: controllerValor,
       width: 400,
     ),
-    getButton(
+    const SizedBox(height: 20),
+    getButtonPopup(
       text: "Transfêrir",
       function: () => functionTranferir(
         context,
@@ -175,14 +175,14 @@ List<Widget> contentPopupPix(
       textEditingController: controllerCPF,
       width: 400,
     ),
-    const SizedBox(height: 10),
     getFormfield(
       hintText: "R\$ 1000",
       labelText: "Digite o valor",
       textEditingController: controllerValor,
       width: 400,
     ),
-    getButton(
+    const SizedBox(height: 20),
+    getButtonPopup(
       text: "Transfêrir PIX",
       function: () => functionTranferirPIX(
         context,
@@ -211,7 +211,7 @@ List<Widget> contentPopupDeposito(
       width: 400,
     ),
     const SizedBox(height: 20),
-    getButton(
+    getButtonPopup(
       text: "Depositar.",
       function: () => functionDeposito(
         context,
